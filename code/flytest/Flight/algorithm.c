@@ -47,7 +47,7 @@ void algorithm_pose(vector3i_t* _ptr_acce ,
 void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , ptr_euler_t _ptr_pose){
 	
 	//Initialize pose
-	static struct quaternions4f_t q = {
+	static quaternions4f_t q = {
 		.qw = 1,
 		.qx = 0,
 		.qy = 0,
@@ -68,10 +68,10 @@ void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro
 	
 	//Time update
 	float w_0 = 0;
-	q.qw = q.qw + 1/2 * delta_t * (q.qw * w_0 - q.qx * w.x - q.qy * w.y - q.qz * w.z);
-	q.qx = q.qx + 1/2 * delta_t * (q.qw * w.x + q.qx * w_0 - q.qy * w.z - q.qz * w.y);
-	q.qy = q.qy + 1/2 * delta_t * (q.qw * w.y - q.qx * w.z - q.qy * w_0 - q.qz * w.x);
-	q.qz = q.qz + 1/2 * delta_t * (q.qw * w.z + q.qx * w.y - q.qy * w.x - q.qz * w_0);
+	q.qw = q.qw + 0.5 * delta_t * (q.qw * w_0 - q.qx * w.x - q.qy * w.y - q.qz * w.z);
+	q.qx = q.qx + 0.5 * delta_t * (q.qw * w.x + q.qx * w_0 + q.qy * w.z - q.qz * w.y);
+	q.qy = q.qy + 0.5 * delta_t * (q.qw * w.y - q.qx * w.z - q.qy * w_0 + q.qz * w.x);
+	q.qz = q.qz + 0.5 * delta_t * (q.qw * w.z + q.qx * w.y - q.qy * w.x - q.qz * w_0);
 
 	//Normalization
 	q.qw = q.qw / (q.qw * q.qw + q.qx * q.qx + q.qy * q.qy + q.qz * q.qz);
@@ -80,10 +80,11 @@ void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro
 	q.qz = q.qz / (q.qw * q.qw + q.qx * q.qx + q.qy * q.qy + q.qz * q.qz);
 	
 	//quarernion -> Euler angle
-	_ptr_pose->roll = atan2f( 2 * (q.qw * q.q1 + q.q2 * q.q3) , 1 - 2 * (q.q1 * q.q1 + q.q2 * q.q2) );
-	_ptr_pose->pitch = asinf( 2 * (q.qw * q.q2 - q.q3 * q.q1) );
-	_ptr_pose->yaw  = atan2f( 2 * (q.qw * q.q3 + q.q1 * q.q2) , 1 - 2 * (q.q2 * q.q2 + q.q3 + q.q3) );
+	_ptr_pose->roll = atan2f( 2 * (q.qw * q.qx + q.qy * q.qz) , 1 - 2 * (q.qx * q.qx + q.qy * q.qy) );
+	_ptr_pose->pitch = asinf( 2 * (q.qw * q.qy - q.qz * q.qx) );
+	_ptr_pose->yaw  = atan2f( 2 * (q.qw * q.qz + q.qx * q.qy) , 1 - 2 * (q.qy * q.qy + q.qz * q.qz) );
+	
 	printf("{pose:%f,%f,%f}\n\r",_ptr_pose->pitch,_ptr_pose->roll,_ptr_pose->yaw);
+	
 }
-
 
