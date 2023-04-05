@@ -27,4 +27,11 @@ typedef struct {
     int32_t z;
 } vector3l_t;
 
+typedef struct {
+    float qw;
+    float qx;
+    float qy;
+    float qz;
+} quaternions4f_t;
+
 #endif
