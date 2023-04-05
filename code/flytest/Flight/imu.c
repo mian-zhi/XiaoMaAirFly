@@ -171,7 +171,7 @@ void mpu_gyro_get_offset()
 		gyro_sample_sum.x += gyro_raw_data.x;
 		gyro_sample_sum.y += gyro_raw_data.y;
 		gyro_sample_sum.z += gyro_raw_data.z;
-		printf("acce_sample_sum:%d,%d,%d\n\r",gyro_sample_sum.x,gyro_sample_sum.y,gyro_sample_sum.z);
+		printf("_sample_sum:%d,%d,%d\n\r",gyro_sample_sum.x,gyro_sample_sum.y,gyro_sample_sum.z);
 		delay_ms(5);
 	}
 	
@@ -335,16 +335,17 @@ char mpu_data_update(vector3i_t* _ptr_acce ,
 										 char _bool_print_data){
 	/* read the raw data from mpu6050 */
 	mpu_read_acce_raw(_ptr_acce);
-	mpu_read_acce_raw(_ptr_acce);
+	mpu_read_gyro_raw(_ptr_gyro);
 	
 	/* calibrate the raw data */
 	if(_bool_calibrate == 1)
 	{
 		mpu_acce_calibrate(_ptr_acce);
-		mpu_gyro_calibrate(_ptr_acce);
+		mpu_gyro_calibrate(_ptr_gyro);
 	}
 	if(_bool_print_data == 1)
 		printf("{ACC_raw:%d,%d,%d}\n\r",_ptr_acce->x,_ptr_acce->y,_ptr_acce->z);
+		printf("{GYR_raw:%d,%d,%d}\n\r",_ptr_gyro->x,_ptr_gyro->y,_ptr_gyro->z);
 	
 	/* filter */
 	if(_bool_filter == 1)

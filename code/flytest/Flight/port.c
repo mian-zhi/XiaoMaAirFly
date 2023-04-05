@@ -72,7 +72,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if(tim_delay%2 == 0) // 1ms * 500 = 500ms
 		{
 			mpu_data_update(&acce , &gyro ,1 ,1 ,0);
-			algorithm_pose(&acce , &gyro , &pose , algorithm_pose_acce_only);
+			algorithm_pose(&acce , &gyro , &pose , algorithm_pose_EKF_Quaternion);
 		}
 	}
 }
