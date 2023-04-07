@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=D:/Code/flytest/flytest/Inc
+HeaderPath=D:/XiaoMaAirFly/XiaoMaAirFly/code/flytest/Inc
 HeaderFiles=stm32f1xx_it.h;stm32f1xx_hal_conf.h;main.h;gpio.h;i2c.h;usart.h;tim.h;
-SourcePath=D:/Code/flytest/flytest/Src
+SourcePath=D:/XiaoMaAirFly/XiaoMaAirFly/code/flytest/Src
 SourceFiles=stm32f1xx_it.c;stm32f1xx_hal_msp.c;main.c;gpio.c;i2c.c;usart.c;tim.c;
 
 [PreviousLibFiles]

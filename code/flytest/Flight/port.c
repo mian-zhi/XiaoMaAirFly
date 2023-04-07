@@ -57,6 +57,23 @@ int i2c_mpu_multi_read(uint8_t slave_address, uint8_t reg_address, uint8_t *ptr_
 
 
 /**
+	@brief write single data to the oled register
+	@param uint8_t   slave_address
+				 uint8_t   reg_address
+				 uint8_t   reg_data
+	@return
+			1 sccessd
+			0 fail
+*/
+//int i2c_oled_single_write(uint8_t slave_address, uint8_t reg_address, uint8_t reg_data)
+//{
+//	if (HAL_I2C_Mem_Write(&hi2c2, slave_address << 1, reg_address, I2C_MEMADD_SIZE_8BIT, &reg_data, 1 , 9999) != HAL_OK)
+//		return -1;
+//	return 0;
+//}
+
+
+/**
 	@brief tim2
 	@param 
 	@return
@@ -115,9 +132,27 @@ void gpio_led_red_turn_off()
 
 
 
+/* SCL -- PB10 */
+void gpio_iic_scl_set(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
+}
+void gpio_iic_scl_reset(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
+}
 
 
 
+/* SDA -- PB11 */
+void gpio_iic_sda_set(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_SET);
+}
+void gpio_iic_sda_reset(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
+}
 
 
 

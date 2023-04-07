@@ -27,6 +27,7 @@
 "flytest\imu.o"
 "flytest\port.o"
 "flytest\algorithm.o"
+"flytest\viewer.o"
 --library_type=microlib --strict --scatter "flytest\flytest.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

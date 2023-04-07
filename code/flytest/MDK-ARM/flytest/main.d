@@ -34,8 +34,10 @@ flytest\main.o: ../Inc/tim.h
 flytest\main.o: ../Inc/usart.h
 flytest\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 flytest\main.o: ../Inc/gpio.h
+flytest\main.o: ..\Flight\control.h
 flytest\main.o: ..\Flight\Config.h
 flytest\main.o: ..\Flight\imu.h
 flytest\main.o: ..\Flight\port.h
 flytest\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 flytest\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+flytest\main.o: ..\Flight\viewer.h
