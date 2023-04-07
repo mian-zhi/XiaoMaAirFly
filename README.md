@@ -24,8 +24,10 @@ v0.1.2 全部的飞控文件都放在 Flight 这个文件夹下：
 - 系统文件 system file
   -  config.h：配置文件
   - port.c \ port.h：接口文件，所有的与底层相关的函数和接口都在这个文件中，如果需要移植飞控，则需要重写该文件
+  - control.c \ control/h ：控制文件，负责调用各个库（update on 7th April by MianZhi）
 - 外设文件 Peripheral file
   - imu.c \ imu.h：陀螺仪相关的文件
+  - viewer.c \ viewer.h：可视化文件 （update on 7th April by MianZhi）
 - 数学文件 Math file
   - algorithm.c \ algorithm.h：各种算法的文件
 
@@ -83,8 +85,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 - V0.1.1（no commit）
   - 绘制第一版电路进行验证部分功能
   - 编写了底层代码
+  
 - V0.1.2
   - 绘制了第二版的电路，解决了SWD的问题
   - 编写了陀螺仪相关的配置代码，可以正常读取陀螺仪数据，并进行矫正和滤波
   - 开放了第一个接口，可以读取六个自由度的数据，并且开放了用于姿态解算的算法
-
+  - 编写了1.3寸的 oled 驱动代码，包括简单的字符显示函数 （update on 7th April by MianZhi）
+  
+  
