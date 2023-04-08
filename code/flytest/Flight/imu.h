@@ -111,4 +111,7 @@ typedef struct{
 char mpu_init(void);
 char mpu_data_update(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , char _bool_calibrate, char _bool_filter , char _bool_print_data);
 
+void mpu_get_acce_offest(vector3l_t* _ptr_offset);
+void mpu_get_gyro_offest(vector3l_t* _ptr_offset);
+
 #endif

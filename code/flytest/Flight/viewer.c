@@ -280,11 +280,12 @@ void oled_show_single_asscii(uint8_t _col, uint8_t _page, uint8_t _char)
 	
 	@return void
 */
-void oled_show_multi_asscii(uint8_t _col , uint8_t _page , uint8_t* _ptr_data , uint8_t _len)
+void oled_show_multi_asscii(uint8_t _col , uint8_t _page , uint8_t* _ptr_data , uint8_t _len , uint8_t _speed)
 {
 	for(int iter = 0; iter<_len ; iter++)
 	{
 		oled_show_single_asscii(_col + iter*6 , _page , _ptr_data[iter]);
+		delay_ms(_speed);
 	}
 }
 
@@ -323,6 +324,40 @@ void oled_show_line_by_line()
 		}
 		delay_ms(500);
 	}
+}
+
+void oled_show_start_info()
+{
+	oled_fill_screen(0x00);
+	uint8_t data_0[] = "XiaoMaAirFly  -v0.1.2";
+	oled_show_multi_asscii(0,0,data_0,21,10);
+	
+	uint8_t data_1[] = "  by MianZhi";
+	oled_show_multi_asscii(0,1,data_1,12,10);
+	
+	uint8_t data_2[] = "  by Wincent";
+	oled_show_multi_asscii(0,2,data_2,12,10);
+	
+	uint8_t data_4[] = "System init:";
+	oled_show_multi_asscii(0,4,data_4,12,10);
+	
+	uint8_t data_6[] = "LOG:imu starting...";
+	oled_show_multi_asscii(0,6,data_6,19,10);
+	
+	uint8_t data_7[] = "LOG:imu has init";
+	oled_show_multi_asscii(0,7,data_7,16,5);
+}
+
+
+void oled_show_imu_data(void)
+{
+	oled_fill_screen(0x00);
+	uint8_t data_0[] = "Calibration:";
+	oled_show_multi_asscii(0,0,data_0,12,10);
+	uint8_t data_1[] = " A:";
+	oled_show_multi_asscii(0,1,data_1,3,10);
+	uint8_t data_2[] = " G:";
+	oled_show_multi_asscii(0,2,data_2,3,10);
 }
 
 
