@@ -64,8 +64,8 @@ void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro
 	float delta_t = 0.02;
 	
 	// store data 
-	vector3f_t w_T_2 , w_T;
-	vector3f_t a_T_2 , a_T;
+	static vector3f_t w_T_2 , w_T;
+	static vector3f_t a_T_2 , a_T;
 	static uint8_t flag = 0;
 	flag++;
 
@@ -164,26 +164,6 @@ void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro
 	_ptr_pose->yaw  = atan2f( 2 * (q.qw * q.qz + q.qx * q.qy) , 1 - 2 * (q.qy * q.qy + q.qz * q.qz) );
 
 	printf("{pose:%f,%f,%f}\n\r",_ptr_pose->pitch,_ptr_pose->roll,_ptr_pose->yaw);
-	
-}
-
-/**
-	@brief store omega for Runge-Kutta 
-	@param ptr of gyro
-				 ptr of gyro
-				 ptr of omega_T
-				 ptr of omega_T_2
-				 index
-	@return none
-*/
-void store_data(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , vector3f_t* _ptr_omega_backup , vector3f_t* _ptr_acce_backup , uint8_t index){
-	
-	_ptr_acce_backup[index - 1].x = _ptr_acce->x * ACCEL_SCALE;
-	_ptr_acce_backup[index - 1].y = _ptr_acce->y * ACCEL_SCALE;
-	_ptr_acce_backup[index - 1].z = _ptr_acce->z * ACCEL_SCALE;
-	_ptr_omega_backup[index - 1].x = _ptr_gyro->x * GYRO_SCALE;
-	_ptr_omega_backup[index - 1].y = _ptr_gyro->y * GYRO_SCALE;
-	_ptr_omega_backup[index - 1].z = _ptr_gyro->z * GYRO_SCALE;
 	
 }
 

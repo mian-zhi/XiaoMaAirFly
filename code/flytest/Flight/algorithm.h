@@ -32,8 +32,6 @@ void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro
 
 void algorithm_pose_ESKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , ptr_euler_t _ptr_pose);
 
-void store_data(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , vector3f_t* _ptr_omega_backup , vector3f_t* _ptr_acce_backup , uint8_t index);
-
 void quaternion_norm(quaternions4f_t* _ptr_quaternion);
 
 #endif
