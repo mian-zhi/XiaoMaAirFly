@@ -82,14 +82,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == htim2.Instance) //5ms
 	{	
-		static int16_t tim_delay = 0;
-		static vector3i_t acce , gyro ;
+		static uint8_t tim_delay = 0;
+		static vector3i_t acce , gyro;
 		static euler_t pose;
 		tim_delay++;
-		if(tim_delay%2 == 0) // 1ms * 500 = 500ms
+
+		if(tim_delay%2 == 0) // 5ms * 2 = 10ms
 		{
-			mpu_data_update(&acce , &gyro ,1 ,1 ,0);
+			//Get imu original data
+			mpu_data_update(&acce , &gyro ,1 ,0 ,0);
+			//pose estimation
 			algorithm_pose(&acce , &gyro , &pose , algorithm_pose_EKF_Quaternion);
+			// refresh time_delay
+			tim_delay = 0;
 		}
 	}
 }
