@@ -29,8 +29,8 @@ void algorithm_pose_acce_only(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , pt
 				 ptr of function
 	@return 1 successful
 */
-void algorithm_pose(vector3f_t* _ptr_acce , 
-										vector3f_t* _ptr_gyro , 
+void algorithm_pose(vector3i_t* _ptr_acce , 
+										vector3i_t* _ptr_gyro , 
 										ptr_euler_t _ptr_pose ,
 										algorithm_pose_funtion_ptr _ptr_function)
 {
@@ -44,7 +44,7 @@ void algorithm_pose(vector3f_t* _ptr_acce ,
 				 ptr of pose
 	@return none
 */
-void algorithm_pose_EKF_Quaternion(vector3f_t* _ptr_acce , vector3f_t* _ptr_omega_backup , ptr_euler_t _ptr_pose){
+void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , ptr_euler_t _ptr_pose){
 	
 	// Initialize pose and omega
 	static quaternions4f_t q = {
@@ -59,26 +59,37 @@ void algorithm_pose_EKF_Quaternion(vector3f_t* _ptr_acce , vector3f_t* _ptr_omeg
 		.y = 0,
 		.z = 0
 	};
-
-	// Tiny time intervals. This term is determined by settings of TIM2.
-	float delta_t = 0.01;
-
-	// Read omega data stored before 
+	
+	// time step for quaternion update 
+	float delta_t = 0.02;
+	
+	// store data 
 	vector3f_t w_T_2 , w_T;
-	{
-		w_T_2.x = _ptr_omega_backup[0].x;
-		w_T_2.y = _ptr_omega_backup[0].y;
-		w_T_2.z = _ptr_omega_backup[0].z;	
+	vector3f_t a_T_2 , a_T;
+	static uint8_t flag = 0;
+	flag++;
 
-		w_T.x = _ptr_omega_backup[1].x;
-		w_T.y = _ptr_omega_backup[1].y;
-		w_T.z = _ptr_omega_backup[1].z;
+	if(flag % 2 != 0){
+		w_T_2.x = _ptr_gyro->x * GYRO_SCALE;
+		w_T_2.y = _ptr_gyro->y * GYRO_SCALE;
+		w_T_2.z = _ptr_gyro->z * GYRO_SCALE;
+		
+		a_T_2.x = _ptr_acce->x * ACCEL_SCALE;
+		a_T_2.y = _ptr_acce->y * ACCEL_SCALE;
+		a_T_2.z = _ptr_acce->z * ACCEL_SCALE;
+		
+		return;
 	}
-
-	//vector3f_t acc;
-	//acc.x = _ptr_acce->x * ACCEL_SCALE;
-	//acc.y = _ptr_acce->y * ACCEL_SCALE;
-	//acc.z = _ptr_acce->z * ACCEL_SCALE;
+	else if(flag % 2 == 0){
+		w_T.x = _ptr_gyro->x * GYRO_SCALE;
+		w_T.y = _ptr_gyro->y * GYRO_SCALE;
+		w_T.z = _ptr_gyro->z * GYRO_SCALE;
+		
+		a_T.x = _ptr_acce->x * ACCEL_SCALE;
+		a_T.y = _ptr_acce->y * ACCEL_SCALE;
+		a_T.z = _ptr_acce->z * ACCEL_SCALE;
+	}
+	flag = 0;
 	
 	// Runge-kutta processing 
 	float ww0 = 0;
