@@ -128,13 +128,13 @@ void mpu_acce_get_offset()
 	acce_sample_sum.y = 0;
 	acce_sample_sum.z = 0;
 	
-	printf("Acc Calibration Start\n\r");
+//	printf("Acc Calibration Start\n\r");
 	for(num_samples = 0 ; num_samples < 100 ; num_samples++){
 		mpu_read_acce_raw(&acce_raw_data);//读取原始数据
 		acce_sample_sum.x += acce_raw_data.x;
 		acce_sample_sum.y += acce_raw_data.y;
 		acce_sample_sum.z += (acce_raw_data.z-4096);
-		printf("acce_sample_sum:%d,%d,%d\n\r",acce_sample_sum.x,acce_sample_sum.y,acce_sample_sum.z);
+//		printf("acce_sample_sum:%d,%d,%d\n\r",acce_sample_sum.x,acce_sample_sum.y,acce_sample_sum.z);
 		delay_ms(5);
 	}
 	
@@ -142,10 +142,10 @@ void mpu_acce_get_offset()
 	imu_static_param.acce_offset.y = acce_sample_sum.y / num_samples;
 	imu_static_param.acce_offset.z = acce_sample_sum.z / num_samples;
 	
-	printf("Acc_RawData_Offset:%d,%d,%d\n\r", imu_static_param.acce_offset.x,
-																						imu_static_param.acce_offset.y,
-																						imu_static_param.acce_offset.z);
-	printf("Acc Calibration Stop\n\r");
+//	printf("Acc_RawData_Offset:%d,%d,%d\n\r", imu_static_param.acce_offset.x,
+//																						imu_static_param.acce_offset.y,
+//																						imu_static_param.acce_offset.z);
+//	printf("Acc Calibration Stop\n\r");
 }
 
 
@@ -165,13 +165,13 @@ void mpu_gyro_get_offset()
 	gyro_sample_sum.y = 0;
 	gyro_sample_sum.z = 0;
 	
-	printf("Gyro Calibration Start\n\r");
+//	printf("Gyro Calibration Start\n\r");
 	for(num_samples = 0 ; num_samples < 100 ; num_samples++){
 		mpu_read_gyro_raw(&gyro_raw_data);
 		gyro_sample_sum.x += gyro_raw_data.x;
 		gyro_sample_sum.y += gyro_raw_data.y;
 		gyro_sample_sum.z += gyro_raw_data.z;
-		printf("_sample_sum:%d,%d,%d\n\r",gyro_sample_sum.x,gyro_sample_sum.y,gyro_sample_sum.z);
+//		printf("_sample_sum:%d,%d,%d\n\r",gyro_sample_sum.x,gyro_sample_sum.y,gyro_sample_sum.z);
 		delay_ms(5);
 	}
 	
@@ -179,10 +179,10 @@ void mpu_gyro_get_offset()
 	imu_static_param.gyro_offset.y = gyro_sample_sum.y / num_samples;
 	imu_static_param.gyro_offset.z = gyro_sample_sum.z / num_samples;
 	
-	printf("Gyro_RawData_Offset:%d,%d,%d\n\r", imu_static_param.gyro_offset.x,
-																						imu_static_param.gyro_offset.y,
-																						imu_static_param.gyro_offset.z);
-	printf("Gyro Calibration Stop\n\r");
+//	printf("Gyro_RawData_Offset:%d,%d,%d\n\r", imu_static_param.gyro_offset.x,
+//																						imu_static_param.gyro_offset.y,
+//																						imu_static_param.gyro_offset.z);
+//	printf("Gyro Calibration Stop\n\r");
 }
 
 /**
@@ -344,8 +344,10 @@ char mpu_data_update(vector3i_t* _ptr_acce ,
 		mpu_gyro_calibrate(_ptr_gyro);
 	}
 	if(_bool_print_data == 1)
+	{
 		printf("{ACC_raw:%d,%d,%d}\n\r",_ptr_acce->x,_ptr_acce->y,_ptr_acce->z);
 		printf("{GYR_raw:%d,%d,%d}\n\r",_ptr_gyro->x,_ptr_gyro->y,_ptr_gyro->z);
+	}
 	
 	/* filter */
 	if(_bool_filter == 1)
@@ -357,4 +359,32 @@ char mpu_data_update(vector3i_t* _ptr_acce ,
 	return 1;
 }
 
+/**
+	function to get imu data
+*/
+/**
+	@brief get the offset of acce
+	@param ptr of offset
+
+	@return void
+*/
+void mpu_get_acce_offest(vector3l_t* _ptr_offset)
+{
+	_ptr_offset->x = imu_static_param.acce_offset.x;
+	_ptr_offset->y = imu_static_param.acce_offset.y;
+	_ptr_offset->z = imu_static_param.acce_offset.z;
+}
+
+/**
+	@brief get the offset of gyro
+	@param ptr of offset
+
+	@return void
+*/
+void mpu_get_gyro_offest(vector3l_t* _ptr_offset)
+{
+	_ptr_offset->x = imu_static_param.gyro_offset.x;
+	_ptr_offset->y = imu_static_param.gyro_offset.y;
+	_ptr_offset->z = imu_static_param.gyro_offset.z;
+}
 

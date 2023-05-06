@@ -1,9 +1,9 @@
 flytest\control.o: ..\Flight\control.c
 flytest\control.o: ..\Flight\control.h
+flytest\control.o: ..\Flight\Config.h
+flytest\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 flytest\control.o: ..\Flight\imu.h
 flytest\control.o: ..\Flight\port.h
-flytest\control.o: ..\Flight\config.h
-flytest\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 flytest\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 flytest\control.o: ../Inc/usart.h
 flytest\control.o: ../Inc/main.h
@@ -40,3 +40,4 @@ flytest\control.o: ../Inc/i2c.h
 flytest\control.o: ../Inc/tim.h
 flytest\control.o: ../Inc/gpio.h
 flytest\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+flytest\control.o: ..\Flight\viewer.h

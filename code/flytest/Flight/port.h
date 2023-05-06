@@ -18,6 +18,7 @@ int i2c_mpu_single_write( uint8_t slave_address,  uint8_t reg_address,  uint8_t 
 int i2c_mpu_multi_read(   uint8_t slave_address,  uint8_t reg_address,  uint8_t *ptr_data, uint8_t lenth);
 
 
+
 /*
 	inclde the tim.h
 */
@@ -33,5 +34,13 @@ void gpio_led_red_turn_on(void);
 void gpio_led_red_turn_off(void);
 void gpio_led_red_toggle(void);
 
+
+/* soft i2c gpio SCL - PB10  SDA - PB11 */
+void gpio_iic_scl_set(void);
+void gpio_iic_scl_reset(void);
+
+
+void gpio_iic_sda_set(void);
+void gpio_iic_sda_reset(void);
 
 #endif

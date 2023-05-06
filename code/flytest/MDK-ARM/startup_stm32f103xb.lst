@@ -463,11 +463,11 @@ ARM Macro Assembler    Page 8
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=flytest\startup_stm32f103xb.d -oflytest\startup_stm32f103xb.o -ID:
-\XiaoMaAirFly\code\flytest\MDK-ARM\RTE -ID:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CM
-SIS\Include -ID:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include --pre
-define="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 521" --predefine
-="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --list=startup_stm32f103xb.ls
-t startup_stm32f103xb.s
+\XiaoMaAirFly\XiaoMaAirFly\code\flytest\MDK-ARM\RTE -ID:\Keil_v5\ARM\PACK\ARM\C
+MSIS\4.5.0\CMSIS\Include -ID:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\
+Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 521
+" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --list=startup_s
+tm32f103xb.lst startup_stm32f103xb.s
 
 
 
