@@ -66,13 +66,23 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim->Instance == htim2.Instance) //5ms
 	{	
 		static int16_t tim_delay = 0;
-		static vector3i_t acce , gyro ;
+		static vector3i_t acce , gyro;
+		static vector3f_t omega_backup[2];
+		static vector3f_t acce_backup[2];
 		static euler_t pose;
 		tim_delay++;
-		if(tim_delay%2 == 0) // 1ms * 500 = 500ms
+
+		//Get imu original data
+		mpu_data_update(&acce , &gyro ,1 ,0 ,1);
+
+		//store data when time = period/2 and period
+		store_data(&acce , &gyro , omega_backup , acce_backup , tim_delay);
+		
+		//pose estimation
+		if(tim_delay%2 == 0) // 5ms * 2 = 10ms
 		{
-			mpu_data_update(&acce , &gyro ,1 ,1 ,0);
-			algorithm_pose(&acce , &gyro , &pose , algorithm_pose_EKF_Quaternion);
+			tim_delay = 0;
+			algorithm_pose(acce_backup , omega_backup , &pose , algorithm_pose_EKF_Quaternion);
 		}
 	}
 }
