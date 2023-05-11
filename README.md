@@ -108,7 +108,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 ## 贡献者 Contributors
 
-- [mian-zhi](https://github.com/mian-zhi) ：发起并维护了该项目，并对STM32
+- [mian-zhi](https://github.com/mian-zhi) ：发起并维护了该项目，并编写底层驱动
 
 - [akawincent](https://github.com/akawincent) ：部署飞控算法
 
