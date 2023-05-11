@@ -10,7 +10,7 @@
 
 ### 使用条件 Prerequisites
 
-在当前版本（v0.1.2）你需要：
+在当前版本（V0.1.3）你需要：
 
 - 安装 MDK5 
 - 搭载了主控 stm32f103c8t6 芯片和 陀螺仪 mpu6050  的电路板（请看hardware中的原理图）
@@ -19,9 +19,9 @@
 
 ### 文件架构 File structure
 
-v0.1.2 全部的飞控文件都放在 Flight 这个文件夹下：
+V0.1.3 全部的飞控文件都放在 Flight 这个文件夹下：
 
-- 系统文件 system file
+- 系统文件 System file
   -  config.h：配置文件
   - port.c \ port.h：接口文件，所有的与底层相关的函数和接口都在这个文件中，如果需要移植飞控，则需要重写该文件
   - control.c \ control/h ：控制文件，负责调用各个库（update on 7th April by MianZhi）
@@ -39,7 +39,7 @@ v0.1.2 全部的飞控文件都放在 Flight 这个文件夹下：
 
 只需要在 algorithm.c 这个文件中，编写函数，例如：
 
-```
+```c
 void algorithm_pose_acce_only(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , ptr_euler_t _ptr_pose)
 {
 	vector3f_t acce;
@@ -56,7 +56,7 @@ void algorithm_pose_acce_only(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , pt
 
 然后再port.c中，修改algorithm_pose的最后一个参数为你的函数名参数即可：
 
-```
+```c
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == htim2.Instance) //5ms
@@ -74,6 +74,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 ```
 
+
+
 ## 如何加入 How join
 
 我们欢迎任何人提供自己的算法到我们的平台上，只需要按照使用示例，编写一个 algorithm_pose_xx 到 algorithm文件中，即可进行验证。欢迎你push你的代码。
@@ -87,9 +89,28 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   - 编写了底层代码
   
 - V0.1.2
+  
   - 绘制了第二版的电路，解决了SWD的问题
   - 编写了陀螺仪相关的配置代码，可以正常读取陀螺仪数据，并进行矫正和滤波
   - 开放了第一个接口，可以读取六个自由度的数据，并且开放了用于姿态解算的算法
   - 编写了1.3寸的 oled 驱动代码，包括简单的字符显示函数 （update on 7th April by MianZhi）
   
+- V0.1.3
   
+  - 硬件更新（update on 11th May 2023 by Jekyll）
+    - 更新了第三版的电路，重新设计为3.5cm * 3.5cm
+    - 去除了ch340芯片、mircro-usb端口、修改串口端口为 GH1.25
+    - 加入了 PPM 的 GH1.25 接口
+  - 软件更新（update on 11th May 2023 by wincent）
+    - 使用四阶 Runge-Kutta 法更新角速度状态，提高精度了
+  
+  
+
+## 贡献者 Contributors
+
+- [mian-zhi](https://github.com/mian-zhi) ：发起并维护了该项目，并对STM32
+
+- [akawincent](https://github.com/akawincent) ：部署飞控算法
+
+- [Jekyll-Dieleco](https://github.com/Jekyll-Dieleco) ：更新V0.1.3版本电路，维护硬件
+
