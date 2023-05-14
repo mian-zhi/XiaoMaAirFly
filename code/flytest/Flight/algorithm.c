@@ -163,7 +163,7 @@ void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro
 	_ptr_pose->pitch = asinf( 2 * (q.qw * q.qy - q.qz * q.qx) );
 	_ptr_pose->yaw  = atan2f( 2 * (q.qw * q.qz + q.qx * q.qy) , 1 - 2 * (q.qy * q.qy + q.qz * q.qz) );
 
-	
+	printf("{pose:%f,%f,%f}\n\r",_ptr_pose->pitch,_ptr_pose->roll,_ptr_pose->yaw);
 }
 
 /**

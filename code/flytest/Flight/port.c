@@ -90,7 +90,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if(tim_delay%2 == 0) // 5ms * 2 = 10ms
 		{
 			//Get imu original data
-			mpu_data_update(&acce , &gyro ,1 ,0 ,0);
+			mpu_data_update(&acce , &gyro ,1 ,1 ,0);
 			//pose estimation
 			algorithm_pose(&acce , &gyro , &pose , algorithm_pose_EKF_Quaternion);
 			// refresh time_delay

@@ -329,7 +329,7 @@ void oled_show_line_by_line()
 void oled_show_start_info()
 {
 	oled_fill_screen(0x00);
-	uint8_t data_0[] = "XiaoMaAirFly  -v0.1.2";
+	uint8_t data_0[] = "XiaoMaAirFly  -v0.1.3";
 	oled_show_multi_asscii(0,0,data_0,21,10);
 	
 	uint8_t data_1[] = "  by MianZhi";
