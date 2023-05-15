@@ -186,4 +186,14 @@ void quaternion_norm(quaternions4f_t* _ptr_quaternion){
 	_ptr_quaternion->qz = _ptr_quaternion->qz / mod;
 }
 
-
+/**
+	@brief algorithm for calulate the pose using Mahony
+	@param ptr of acce
+				 ptr of gyro
+				 ptr of pose
+	@return none
+*/
+void algorithm_pose_Mahony(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , ptr_euler_t _ptr_pose)
+{
+	
+}

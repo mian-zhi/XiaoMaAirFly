@@ -101,10 +101,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     - 更新了第三版的电路，重新设计为3.5cm * 3.5cm
     - 去除了ch340芯片、mircro-usb端口、修改串口端口为 GH1.25
     - 加入了 PPM 的 GH1.25 接口
-  - 软件更新（update on 11th May 2023 by wincent）
-    - 使用四阶 Runge-Kutta 法更新角速度状态，提高精度了
+  - 软件更新
+    - 使用四阶 Runge-Kutta 法更新角速度状态，提高精度了（update on 11th May 2023 by wincent）
+    - 更新了电机配置文件，并进行了测试
   
   
+
+## 更新计划 Update plan
+
+1. 测试新的陀螺仪模块
+2. 对V0.1.3的电路板进行焊接和测试
+3. 对Mahony算法进行重构和移植
+
+
 
 ## 贡献者 Contributors
 
