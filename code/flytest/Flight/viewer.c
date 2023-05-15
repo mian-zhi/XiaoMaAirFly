@@ -349,17 +349,13 @@ void oled_show_start_info()
 }
 
 
-void oled_show_imu_data(void)
+void oled_init()
 {
+	oled_set_config();
+	oled_fill_screen(0xff);
+	HAL_Delay(500);
 	oled_fill_screen(0x00);
-	uint8_t data_0[] = "Calibration:";
-	oled_show_multi_asscii(0,0,data_0,12,10);
-	uint8_t data_1[] = " A:";
-	oled_show_multi_asscii(0,1,data_1,3,10);
-	uint8_t data_2[] = " G:";
-	oled_show_multi_asscii(0,2,data_2,3,10);
+	oled_show_start_info();
 }
-
-
 
 

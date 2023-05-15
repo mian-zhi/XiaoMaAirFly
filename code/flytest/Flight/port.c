@@ -55,23 +55,15 @@ int i2c_mpu_multi_read(uint8_t slave_address, uint8_t reg_address, uint8_t *ptr_
 	return 0;
 }
 
-
 /**
-	@brief write single data to the oled register
-	@param uint8_t   slave_address
-				 uint8_t   reg_address
-				 uint8_t   reg_data
+	@brief tim2 init
+	@param 
 	@return
-			1 sccessd
-			0 fail
 */
-//int i2c_oled_single_write(uint8_t slave_address, uint8_t reg_address, uint8_t reg_data)
-//{
-//	if (HAL_I2C_Mem_Write(&hi2c2, slave_address << 1, reg_address, I2C_MEMADD_SIZE_8BIT, &reg_data, 1 , 9999) != HAL_OK)
-//		return -1;
-//	return 0;
-//}
-
+void tim_control_init(void)
+{
+	HAL_TIM_Base_Start_IT(&htim2);
+}
 
 /**
 	@brief tim2
@@ -100,7 +92,60 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 
-void delay_ms(uint32_t _time){
+/**
+	@brief init motor tim
+	@param void
+	@return void
+*/
+void motor_tim_init(void)
+{
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_4);
+}
+/**
+	@brief motor1 pwm output
+	@param pwm (0,1000)
+	@return void
+*/
+void motor1_tim_set_pwm(uint32_t _pwm)
+{
+	__HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, _pwm);
+}
+
+/**
+	@brief motor2 pwm output
+	@param pwm (0,1000)
+	@return void
+*/
+void motor2_tim_set_pwm(uint32_t _pwm)
+{
+	__HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_2, _pwm);
+}
+
+/**
+	@brief motor3 pwm output
+	@param pwm (0,1000)
+	@return void
+*/
+void motor3_tim_set_pwm(uint32_t _pwm)
+{
+	__HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_3, _pwm);
+}
+/**
+	@brief motor4 pwm output
+	@param pwm (0,1000)
+	@return void
+*/
+void motor4_tim_set_pwm(uint32_t _pwm)
+{
+	__HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_4, _pwm);
+}
+
+
+void delay_ms(uint32_t _time)
+{
 	HAL_Delay(_time);
 }
 

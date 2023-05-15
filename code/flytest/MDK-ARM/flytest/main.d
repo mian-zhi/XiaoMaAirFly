@@ -41,3 +41,4 @@ flytest\main.o: ..\Flight\port.h
 flytest\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 flytest\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 flytest\main.o: ..\Flight\viewer.h
+flytest\main.o: ..\Flight\motor.h

@@ -25,6 +25,13 @@ int i2c_mpu_multi_read(   uint8_t slave_address,  uint8_t reg_address,  uint8_t 
 #include "tim.h"
 void delay_ms(uint32_t _time);
 
+void tim_control_init(void);
+
+void motor_tim_init(void);
+void motor1_tim_set_pwm(uint32_t _pwm);
+void motor2_tim_set_pwm(uint32_t _pwm);
+void motor3_tim_set_pwm(uint32_t _pwm);
+void motor4_tim_set_pwm(uint32_t _pwm);
 
 /*
 	inclde the gpio.h

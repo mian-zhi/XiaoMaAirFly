@@ -91,8 +91,6 @@ float butterworth_filter(float _input, ptr_butter_data _ptr_data, ptr_butter_par
 void calculate_butterworth_parameters(float _sample_frequent, float _cutoff_frequent, ptr_butter_parameters _ptr_parameters);
 void mpu_acc_filter(vector3i_t* _ptr_acce);
 
-
-
 /**
 	MPU6050 GLOBAL
 */
@@ -104,8 +102,6 @@ typedef struct{
 	/* fiter */
 	butter_data_t acce_low_pass_fiter_data[3];
 	butter_parameters_t acce_low_pass_fiter_param;
-	
-	
 }IMU_STATIC_PARAMETERS;
 
 char mpu_init(void);

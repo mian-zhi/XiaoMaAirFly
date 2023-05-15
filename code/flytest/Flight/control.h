@@ -4,6 +4,7 @@
 #include "Config.h"
 #include "imu.h"
 #include "viewer.h"
+#include "motor.h"
 
 void fight_init();
 void int_to_5_char(int32_t _int , uint8_t* _ptr_char , uint8_t _offset_ptr);

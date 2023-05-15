@@ -1,7 +1,24 @@
 #include "algorithm.h"
 
+
 /**
 	@brief algorithm for calulate the pose
+	@param ptr of acce
+				 ptr of gyro
+				 ptr of pose
+				 ptr of function
+	@return 1 successful
+*/
+void algorithm_pose(vector3i_t* _ptr_acce , 
+										vector3i_t* _ptr_gyro , 
+										ptr_euler_t _ptr_pose ,
+										algorithm_pose_funtion_ptr _ptr_function)
+{
+	(*_ptr_function)(_ptr_acce,_ptr_gyro,_ptr_pose);
+}
+
+/**
+	@brief first algorithm for calulate the pose by only acce
 	@param ptr of acce
 				 ptr of gyro
 				 ptr of pose
@@ -21,21 +38,6 @@ void algorithm_pose_acce_only(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro , pt
 	printf("{pose:%f,%f,%f}\n\r",_ptr_pose->pitch,_ptr_pose->roll,_ptr_pose->yaw);
 }
 
-/**
-	@brief algorithm for calulate the pose
-	@param ptr of acce
-				 ptr of gyro
-				 ptr of pose
-				 ptr of function
-	@return 1 successful
-*/
-void algorithm_pose(vector3i_t* _ptr_acce , 
-										vector3i_t* _ptr_gyro , 
-										ptr_euler_t _ptr_pose ,
-										algorithm_pose_funtion_ptr _ptr_function)
-{
-	(*_ptr_function)(_ptr_acce,_ptr_gyro,_ptr_pose);
-}
 
 /**
 	@brief algorithm for calulate the pose using EKF on quaternions
@@ -163,7 +165,7 @@ void algorithm_pose_EKF_Quaternion(vector3i_t* _ptr_acce , vector3i_t* _ptr_gyro
 	_ptr_pose->pitch = asinf( 2 * (q.qw * q.qy - q.qz * q.qx) );
 	_ptr_pose->yaw  = atan2f( 2 * (q.qw * q.qz + q.qx * q.qy) , 1 - 2 * (q.qy * q.qy + q.qz * q.qz) );
 
-	printf("{pose:%f,%f,%f}\n\r",_ptr_pose->pitch,_ptr_pose->roll,_ptr_pose->yaw);
+	//printf("{pose:%f,%f,%f}\n\r",_ptr_pose->pitch,_ptr_pose->roll,_ptr_pose->yaw);
 }
 
 /**

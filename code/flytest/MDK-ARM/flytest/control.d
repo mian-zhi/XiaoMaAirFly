@@ -41,3 +41,4 @@ flytest\control.o: ../Inc/tim.h
 flytest\control.o: ../Inc/gpio.h
 flytest\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 flytest\control.o: ..\Flight\viewer.h
+flytest\control.o: ..\Flight\motor.h
